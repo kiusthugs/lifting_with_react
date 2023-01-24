@@ -13,7 +13,6 @@ function App() {
   const [templateExercises, setTemplateExercises] = useState([])
   const [templateNameInput, setTemplateNameInput] = useState("")
   const [templateExerciseInput, setTemplateExerciseInput] = useState("")
-  console.log(templates)
 
   useEffect(() => {
     const templateData = localStorage.getItem('templates')
@@ -34,6 +33,7 @@ function App() {
     setTemplateExerciseInput(e.target.value)
   }
 
+  //Add exercise to template
   function handleAddExercise() {
     const exerObj = {
       id: uuidv4(),
@@ -50,12 +50,13 @@ function App() {
     }
   }
 
+  //Save to template library
   function handleSave() {
     const savedTemplate = {
       id: uuidv4(),
       name: templateNameInput,
       exercises: templateExercises,
-      history: {},
+      history: [],
     }
 
     if(templates) {
@@ -71,9 +72,22 @@ function App() {
     }
   }
 
+  function handleSaveWorkout(index) {
+    //Put deep copy of exercises in history, clear shallow copy completed property
+    const copyWorkoutDeep = JSON.parse(JSON.stringify([...templates]))
+    const copyWorkout = [...templates]
+    const foundWorkoutDeep = copyWorkoutDeep[index]
+    const foundWorkout = copyWorkout[index]
+
+    foundWorkout.history = [...foundWorkoutDeep.exercises]
+    foundWorkout.exercises.forEach((el) => el.completed = [])
+    console.log(foundWorkout)
+
+    setTemplates(copyWorkout)
+  }
+
+  //Add exercise sets to workout
   function addSet(exercise, reps, weight, index) {
-    console.log(exercise)
-    console.log(templates)
 
     const copyTemplates = [...templates]
 
@@ -89,62 +103,11 @@ function App() {
 
 }
 
-
-  // const template = {
-  //   id: 0,
-  //   templateName: "Leg Day",
-  //   exercises: ["Curls", "Calf Raises"],
-  //   history: {
-
-  //   }
-  // }
-
-  // const completedWorkout = [
-  //   {
-  //     id: 0,
-  //     exercise: "Curls",
-  //     sets: [
-  //       {
-  //         id: 0,
-  //         set: 1,
-  //         reps: 10,
-  //         weight: "135lbs"
-  //       },
-  //       {
-  //         id: 1,
-  //         set: 2,
-  //         reps: 12,
-  //         weight: "120lbs"
-  //       }
-  //     ]
-  //   },
-
-  //   {
-  //     id: 1,
-  //     exercise: "Calf Raises",
-  //     sets: [
-  //       {
-  //         id: 0,
-  //         set: 1,
-  //         reps: 12,
-  //         weight: "80lbs"
-  //       },
-  //       {
-  //         id: 1,
-  //         set: 2,
-  //         reps: 15,
-  //         weight: "60lbs"
-  //       }
-  //     ]
-  //   }
-
-  // ]
-
   return (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<TemplateCreator handleExerciseInput={handleExerciseInput} handleAddExercise={handleAddExercise} templateExercises={templateExercises} handleTemplateNameInput={handleTemplateNameInput} handleSave={handleSave} templates={templates} templateNameInput={templateNameInput} templateExerciseInput={templateExerciseInput}/>}/>
-     <Route path="/:id" element={<DisplayWorkout templates={templates} addSet={addSet}/>} />
+     <Route path="/:id" element={<DisplayWorkout templates={templates} addSet={addSet} handleSaveWorkout={handleSaveWorkout}/>} />
     </Routes>
     </BrowserRouter>
   );

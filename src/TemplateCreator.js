@@ -14,7 +14,6 @@ export default function TemplateCreator(props) {
         templates
     } = props
 
-    console.log(templates)
 
   return (
     <div>

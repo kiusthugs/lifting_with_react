@@ -2,7 +2,7 @@ import React from 'react'
 import ExerciseInputs from './ExerciseInputs'
 import {useParams} from 'react-router-dom'
 
-export default function DisplayWorkout({templates, addSet}) {
+export default function DisplayWorkout({templates, addSet, handleSaveWorkout}) {
     console.log(templates)
     const {id} = useParams()
 
@@ -14,6 +14,7 @@ export default function DisplayWorkout({templates, addSet}) {
     <div>
         <h2>{templates[index].name}</h2>
         <ExerciseInputs template={templates[index]} index={index} addSet={addSet}/>
+        <button onClick={() => handleSaveWorkout(index)}>Save</button>
     </div>
   )
 }
