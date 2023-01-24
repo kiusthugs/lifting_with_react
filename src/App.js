@@ -10,25 +10,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
 
   const [templates, setTemplates] = useState([])
-  const [templateWorkout, setTemplateWorkout] = useState()
   const [templateExercises, setTemplateExercises] = useState([])
   const [templateNameInput, setTemplateNameInput] = useState("")
   const [templateExerciseInput, setTemplateExerciseInput] = useState("")
-
-  // const [workoutSelected, setWorkoutSelected] = useState(false)
-  // const [workout, setWorkout] = useState({})
   console.log(templates)
-
-    //clear out exercise after save, make inputs have id
-  useEffect(() => {
-    setTemplates(templateWorkout)
-  }, [templateWorkout])
-
-  // useEffect(() => {
-  //   if (templates !== undefined) {
-  //     setTemplates(JSON.parse(localStorage.getItem('templates')))
-  // }
-  // }, [])
 
   useEffect(() => {
     const templateData = localStorage.getItem('templates')
@@ -39,7 +24,7 @@ function App() {
 
   useEffect(() => {
       localStorage.setItem('templates', JSON.stringify(templates))
-  })
+  }, [templates])
 
   function handleTemplateNameInput(e) {
     setTemplateNameInput(e.target.value)
@@ -52,7 +37,8 @@ function App() {
   function handleAddExercise() {
     const exerObj = {
       id: uuidv4(),
-      name: templateExerciseInput
+      name: templateExerciseInput,
+      completed: []
     }
     console.log(templateExercises)
     if (templateExercises.length > 0) {
@@ -69,27 +55,39 @@ function App() {
       id: uuidv4(),
       name: templateNameInput,
       exercises: templateExercises,
-      history: {}
+      history: {},
     }
 
-    if (templates) {
-      setTemplateWorkout([...templates, savedTemplate])
+    if(templates) {
+      setTemplates([...templates, savedTemplate])
       setTemplateExercises([])
       setTemplateExerciseInput("")
       setTemplateNameInput("")
     } else {
-      setTemplateWorkout([savedTemplate])
+      setTemplates([savedTemplate])
       setTemplateExercises([])
       setTemplateExerciseInput("")
       setTemplateNameInput("")
     }
   }
 
-  // function handleWorkoutSelected(temp) {
-  //   setWorkoutSelected(true)
-  //   setWorkout(temp)
-  // }
+  function addSet(exercise, reps, weight, index) {
+    console.log(exercise)
+    console.log(templates)
 
+    const copyTemplates = [...templates]
+
+    const found = copyTemplates[index].exercises.find(el => el.id === exercise.id)
+    found.completed = [...found.completed, {
+      id: uuidv4(),
+      set: exercise.completed.length + 1,
+      reps: reps,
+      weight: weight
+  }]
+
+    setTemplates(copyTemplates)
+
+}
 
 
   // const template = {
@@ -142,18 +140,11 @@ function App() {
 
   // ]
 
-//   <BrowserRouter>
-//   <Routes>
-//     <Route path="/" element={pokeData && <DisplayPokemon originalPokeData={originalPokeData} handleSearchBox={handleSearchBox} handleType={handleType} handleWeakness={handleWeakness} pokeData={pokeData}/>} />
-//     <Route path="/:id" element={pokeData && <DetailsPage pokeData={pokeData} originalPokeData={originalPokeData} handleReturnPokedex={handleReturnPokedex}/>} />
-//   </Routes>
-// </BrowserRouter>
-
   return (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<TemplateCreator handleExerciseInput={handleExerciseInput} handleAddExercise={handleAddExercise} templateExercises={templateExercises} handleTemplateNameInput={handleTemplateNameInput} handleSave={handleSave} templates={templates} templateNameInput={templateNameInput} templateExerciseInput={templateExerciseInput}/>}/>
-     <Route path="/:id" element={<DisplayWorkout templates={templates}/>} />
+     <Route path="/:id" element={<DisplayWorkout templates={templates} addSet={addSet}/>} />
     </Routes>
     </BrowserRouter>
   );
