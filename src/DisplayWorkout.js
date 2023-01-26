@@ -10,11 +10,16 @@ export default function DisplayWorkout({templates, addSet, handleSaveWorkout}) {
 
     //work on display workout inputs
     //edit button?
+    //Delete button
+
+    //if history length is greater than 0, display history
+    //pass history object in Display History
   return (
     <div>
         <h2>{templates[index].name}</h2>
         <ExerciseInputs template={templates[index]} index={index} addSet={addSet}/>
         <button onClick={() => handleSaveWorkout(index)}>Save</button>
+        {templates[index].history.length > 0 && <DisplayHistory />}
     </div>
   )
 }

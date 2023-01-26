@@ -14,8 +14,6 @@ export default function ExerciseInputs({template, index, addSet, exercises}) {
         setWeight(e.target.value)
     }
 
-    //add save button and put completed list into history, clear out completed list
-
   return (
     template.exercises.map((ex) => {
         console.log(ex)
