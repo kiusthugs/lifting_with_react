@@ -8,6 +8,7 @@ export default function TemplateCreator(props) {
         handleAddExercise, 
         templateExercises,
         handleTemplateNameInput,
+        handleDeleteTemplate,
         templateExerciseInput,
         templateNameInput,
         handleSave,
@@ -27,7 +28,7 @@ export default function TemplateCreator(props) {
         {templateExercises && templateExercises.map((exercise) => <li key={exercise.id}>{exercise.name}</li>)}
         </ul>
         <button onClick={handleSave}>Save Workout</button>
-        {templates !== undefined && <TemplateLibrary templates={templates}/>}
+        {templates !== undefined && <TemplateLibrary templates={templates} handleDeleteTemplate={handleDeleteTemplate}/>}
     </div>
   )
 }

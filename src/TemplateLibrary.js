@@ -2,12 +2,14 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 // import { v4 as uuidv4 } from 'uuid';
 
-export default function TemplateLibrary({templates, handleWorkoutSelected}) {
+export default function TemplateLibrary({templates, handleDeleteTemplate}) {
     
     return(
         templates.map((temp) => {
             return (
-            <Link key={temp.id} to={`${temp.id}`}>
+            <div key={temp.id}>
+            <button onClick={() => handleDeleteTemplate(temp.id)}>X</button>
+            <Link to={`${temp.id}`}>
             <div>
                 <h2>{temp.name}</h2>
                 <ul>
@@ -15,6 +17,7 @@ export default function TemplateLibrary({templates, handleWorkoutSelected}) {
                 </ul>
             </div>
             </Link>
+            </div>
             )
         })
     )

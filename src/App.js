@@ -35,40 +35,49 @@ function App() {
 
   //Add exercise to template
   function handleAddExercise() {
-    const exerObj = {
-      id: uuidv4(),
-      name: templateExerciseInput,
-      completed: []
-    }
-    console.log(templateExercises)
-    if (templateExercises.length > 0) {
-      setTemplateExercises([...templateExercises, exerObj])
-      setTemplateExerciseInput("")
+    if (templateExerciseInput.length > 0) {
+      const exerObj = {
+        id: uuidv4(),
+        name: templateExerciseInput,
+        completed: []
+      }
+      console.log(templateExercises)
+      if (templateExercises.length > 0) {
+        setTemplateExercises([...templateExercises, exerObj])
+        setTemplateExerciseInput("")
+      } else {
+        setTemplateExercises([exerObj])
+        setTemplateExerciseInput("")
+      }
     } else {
-      setTemplateExercises([exerObj])
-      setTemplateExerciseInput("")
+      alert("Input an exercise name")
     }
   }
 
   //Save to template library
   function handleSave() {
-    const savedTemplate = {
-      id: uuidv4(),
-      name: templateNameInput,
-      exercises: templateExercises,
-      history: [],
-    }
 
-    if(templates) {
-      setTemplates([...templates, savedTemplate])
-      setTemplateExercises([])
-      setTemplateExerciseInput("")
-      setTemplateNameInput("")
+    if (templateNameInput.length > 0) {
+      const savedTemplate = {
+        id: uuidv4(),
+        name: templateNameInput,
+        exercises: templateExercises,
+        history: [],
+      }
+  
+      if(templates) {
+        setTemplates([...templates, savedTemplate])
+        setTemplateExercises([])
+        setTemplateExerciseInput("")
+        setTemplateNameInput("")
+      } else {
+        setTemplates([savedTemplate])
+        setTemplateExercises([])
+        setTemplateExerciseInput("")
+        setTemplateNameInput("")
+      }
     } else {
-      setTemplates([savedTemplate])
-      setTemplateExercises([])
-      setTemplateExerciseInput("")
-      setTemplateNameInput("")
+      alert("Save your templates with a name")
     }
   }
 
@@ -103,10 +112,18 @@ function App() {
 
 }
 
+  function handleDeleteTemplate(id) {
+    const copyTemp = [...templates]
+    const index = copyTemp.findIndex(el => el.id === id)
+    copyTemp.splice(index, 1)
+
+    setTemplates(copyTemp)
+  }
+
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<TemplateCreator handleExerciseInput={handleExerciseInput} handleAddExercise={handleAddExercise} templateExercises={templateExercises} handleTemplateNameInput={handleTemplateNameInput} handleSave={handleSave} templates={templates} templateNameInput={templateNameInput} templateExerciseInput={templateExerciseInput}/>}/>
+      <Route path="/" element={<TemplateCreator handleExerciseInput={handleExerciseInput} handleAddExercise={handleAddExercise} templateExercises={templateExercises} handleTemplateNameInput={handleTemplateNameInput} handleSave={handleSave} templates={templates} templateNameInput={templateNameInput} templateExerciseInput={templateExerciseInput} handleDeleteTemplate={handleDeleteTemplate}/>}/>
      <Route path="/:id" element={<DisplayWorkout templates={templates} addSet={addSet} handleSaveWorkout={handleSaveWorkout}/>} />
     </Routes>
     </BrowserRouter>
