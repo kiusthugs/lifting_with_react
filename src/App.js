@@ -125,9 +125,6 @@ function App() {
 
   //Edit button, edit a set in a ongoing workout
   function handleEditSet(id, exercises, template) {
-    console.log(id)
-    console.log(exercises)
-    console.log(template)
     let editReps = Number(prompt("Enter reps"))
     while(!/^[0-9]+$/.test(editReps)) {
       alert("You did not enter a number.");
@@ -151,11 +148,34 @@ function App() {
 
   }
 
+  //Delete set button on ongoing workout
+  function handleDeleteSet(id, exercises, template) {
+    console.log(id)
+    console.log(exercises)
+    console.log(template)
+
+    const copyTemplates = [...templates]
+
+    const templateIndex = copyTemplates.findIndex(el => el.id === template.id)
+    const exerciseIndex = copyTemplates[templateIndex].exercises.findIndex(el => el.id === exercises.id)
+    const completedIndex = copyTemplates[templateIndex].exercises[exerciseIndex].completed.findIndex(el => el.id === id)
+
+    copyTemplates[templateIndex].exercises[exerciseIndex].completed.splice(completedIndex, 1)
+
+    for (let i = 0; i < copyTemplates[templateIndex].exercises[exerciseIndex].completed.length; i++) {
+      console.log("here")
+      copyTemplates[templateIndex].exercises[exerciseIndex].completed[i].set = i + 1
+    }
+
+    setTemplates(copyTemplates)
+
+  }
+
   return (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<TemplateCreator handleExerciseInput={handleExerciseInput} handleAddExercise={handleAddExercise} templateExercises={templateExercises} handleTemplateNameInput={handleTemplateNameInput} handleSave={handleSave} templates={templates} templateNameInput={templateNameInput} templateExerciseInput={templateExerciseInput} handleDeleteTemplate={handleDeleteTemplate}/>}/>
-     <Route path="/:id" element={<DisplayWorkout templates={templates} addSet={addSet} handleSaveWorkout={handleSaveWorkout} handleEditSet={handleEditSet}/>} />
+     <Route path="/:id" element={<DisplayWorkout templates={templates} addSet={addSet} handleSaveWorkout={handleSaveWorkout} handleEditSet={handleEditSet} handleDeleteSet={handleDeleteSet}/>} />
      <Route path="/history" element={<DisplayMasterData templates={templates}/>}/>
     </Routes>
     </BrowserRouter>

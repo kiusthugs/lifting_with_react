@@ -3,7 +3,7 @@ import ExerciseInputs from './ExerciseInputs'
 import DisplayHistory from './DisplayHistory'
 import {useParams, Link} from 'react-router-dom'
 
-export default function DisplayWorkout({templates, addSet, handleSaveWorkout, handleEditSet}) {
+export default function DisplayWorkout({templates, addSet, handleSaveWorkout, handleEditSet, handleDeleteSet}) {
     console.log(templates)
     const {id} = useParams()
 
@@ -12,7 +12,7 @@ export default function DisplayWorkout({templates, addSet, handleSaveWorkout, ha
   return (
     <div>
         <h2>{templates[index].name}</h2>
-        <ExerciseInputs template={templates[index]} index={index} addSet={addSet} handleEditSet={handleEditSet}/>
+        <ExerciseInputs template={templates[index]} index={index} addSet={addSet} handleEditSet={handleEditSet} handleDeleteSet={handleDeleteSet}/>
         <button onClick={() => handleSaveWorkout(index)}>Save</button>
         {templates[index].history.length > 0 && <DisplayHistory template={templates[index]}/>}
         <Link to="/">Home</Link>

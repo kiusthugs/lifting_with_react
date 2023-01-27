@@ -10,7 +10,7 @@ export default function DisplayHistory({template}) {
             <h5>{hist.name}</h5>
             <ol>
             {hist.completed.map((el) => {
-                return <li key={el.id}>{el.reps} x {el.weight}</li>
+                return <li key={el.id}>{el.reps} x {el.weight}lbs</li>
             })}
             </ol>
         </div>)
