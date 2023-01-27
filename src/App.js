@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import TemplateCreator from './TemplateCreator';
 import DisplayWorkout from './DisplayWorkout';
+import DisplayMasterData from './DisplayMasterData';
 import { v4 as uuidv4 } from 'uuid';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -112,6 +113,8 @@ function App() {
 
 }
 
+
+  //Delete a template from template library
   function handleDeleteTemplate(id) {
     const copyTemp = [...templates]
     const index = copyTemp.findIndex(el => el.id === id)
@@ -120,11 +123,40 @@ function App() {
     setTemplates(copyTemp)
   }
 
+  //Edit button, edit a set in a ongoing workout
+  function handleEditSet(id, exercises, template) {
+    console.log(id)
+    console.log(exercises)
+    console.log(template)
+    let editReps = Number(prompt("Enter reps"))
+    while(!/^[0-9]+$/.test(editReps)) {
+      alert("You did not enter a number.");
+      editReps = prompt("Enter a number for reps: ");
+    }
+    let editWeight = prompt("Enter weight")
+    while(!/^[0-9]+$/.test(editWeight)) {
+      alert("You did not enter a number.");
+      editWeight = prompt("Enter a number for weight: ");
+    }
+    const copyTemplates = [...templates]
+
+    const templateIndex = copyTemplates.findIndex(el => el.id === template.id)
+    const exerciseIndex = copyTemplates[templateIndex].exercises.findIndex(el => el.id === exercises.id)
+    const completedIndex = copyTemplates[templateIndex].exercises[exerciseIndex].completed.findIndex(el => el.id === id)
+
+    copyTemplates[templateIndex].exercises[exerciseIndex].completed[completedIndex].reps = editReps
+    copyTemplates[templateIndex].exercises[exerciseIndex].completed[completedIndex].weight = editWeight
+
+    setTemplates(copyTemplates)
+
+  }
+
   return (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<TemplateCreator handleExerciseInput={handleExerciseInput} handleAddExercise={handleAddExercise} templateExercises={templateExercises} handleTemplateNameInput={handleTemplateNameInput} handleSave={handleSave} templates={templates} templateNameInput={templateNameInput} templateExerciseInput={templateExerciseInput} handleDeleteTemplate={handleDeleteTemplate}/>}/>
-     <Route path="/:id" element={<DisplayWorkout templates={templates} addSet={addSet} handleSaveWorkout={handleSaveWorkout}/>} />
+     <Route path="/:id" element={<DisplayWorkout templates={templates} addSet={addSet} handleSaveWorkout={handleSaveWorkout} handleEditSet={handleEditSet}/>} />
+     <Route path="/history" element={<DisplayMasterData templates={templates}/>}/>
     </Routes>
     </BrowserRouter>
   );

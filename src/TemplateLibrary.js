@@ -4,8 +4,9 @@ import {Link} from 'react-router-dom'
 
 export default function TemplateLibrary({templates, handleDeleteTemplate}) {
     
-    return(
-        templates.map((temp) => {
+    return(<>
+    <h2>Workout Library</h2>
+        {templates.map((temp) => {
             return (
             <div key={temp.id}>
             <button onClick={() => handleDeleteTemplate(temp.id)}>X</button>
@@ -19,6 +20,7 @@ export default function TemplateLibrary({templates, handleDeleteTemplate}) {
             </Link>
             </div>
             )
-        })
+        })}
+    </>
     )
 }

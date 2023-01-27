@@ -1,5 +1,6 @@
 import React from 'react'
 import TemplateLibrary from './TemplateLibrary'
+import {Link} from 'react-router-dom'
 
 export default function TemplateCreator(props) {
 
@@ -28,7 +29,9 @@ export default function TemplateCreator(props) {
         {templateExercises && templateExercises.map((exercise) => <li key={exercise.id}>{exercise.name}</li>)}
         </ul>
         <button onClick={handleSave}>Save Workout</button>
-        {templates !== undefined && <TemplateLibrary templates={templates} handleDeleteTemplate={handleDeleteTemplate}/>}
+        {(templates !== undefined && templates.length > 0) && <TemplateLibrary templates={templates} handleDeleteTemplate={handleDeleteTemplate}/>}<br />
+        <Link to="/">Home</Link>
+        <Link to="/history">Dashboard</Link>
     </div>
   )
 }

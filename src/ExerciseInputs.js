@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import CompletedLifts from './CompletedLifts'
 
-export default function ExerciseInputs({template, index, addSet, exercises}) {
+export default function ExerciseInputs({template, index, addSet, handleEditSet}) {
     const [reps, setReps] = useState("")
     const [weight, setWeight] = useState("")
 
@@ -22,7 +22,7 @@ export default function ExerciseInputs({template, index, addSet, exercises}) {
             <input type="text" id="weight" name="weight" onChange={(e) => handleWeight(e)}/><span> lbs </span>
             <button onClick={() => addSet(ex, reps, weight, index)}>Add Set</button>
             <h4>Completed:</h4>
-            <CompletedLifts completed={ex.completed}/>
+            <CompletedLifts completed={ex.completed} handleEditSet={handleEditSet} exercises={ex} template={template}/>
         </div>
     })
   )
