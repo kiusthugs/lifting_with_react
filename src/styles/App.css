@@ -1,5 +1,6 @@
 @import 'home.css';
 @import 'workout.css';
+@import 'overview.css';
 
 * {
   box-sizing: border-box;

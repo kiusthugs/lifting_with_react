@@ -15,7 +15,7 @@ export default function ExerciseInputs({template, index, addSet, handleEditSet, 
 
   return (
     template.exercises.map((ex) => {
-        return (<><div key={ex.id} className="exercise">
+        return (<div key={ex.id}><div className="exercise">
             <h3>{ex.name}</h3>
             <div className="exercise-input">
             <input type="text" id="reps" name="reps" onChange={(e) => handleReps(e)}/>
@@ -28,7 +28,7 @@ export default function ExerciseInputs({template, index, addSet, handleEditSet, 
         <ul className="completed-lifts">
         <CompletedLifts completed={ex.completed} handleEditSet={handleEditSet} handleDeleteSet={handleDeleteSet} exercises={ex} template={template}/>
         </ul>
-        </>)
+        </div>)
     })
   )
 }

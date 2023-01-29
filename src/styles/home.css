@@ -57,6 +57,7 @@
 }
 
 .template-add {
+    cursor: pointer;
     margin: 10px;
     width: 150px;
     height: 25px;
@@ -67,6 +68,7 @@
     width: 200px;
     height: 35px;
     background-color: #fc8c63;
+    cursor: pointer;
 }
 
 .template-library {
@@ -121,14 +123,14 @@
     text-align: right;
 }
 
-.nav-link-workout {
+.nav-link {
     text-decoration: none;
     margin: 0 auto;
     padding: 10px;
     color: black;
 }
 
-.nav-link-workout:hover{
+.nav-link:hover{
     color: blue;
 }
 

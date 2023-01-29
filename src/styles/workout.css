@@ -1,5 +1,6 @@
 .exercise {
     padding: 0 10px;
+    overflow-wrap: break-word;
 }
 
 .display-workout h2 {
@@ -65,4 +66,21 @@
     background-color: #fc8c63;
     border: none;
     font-size: 1.2em;
+}
+
+.nav-link-workout {
+    text-decoration: none;
+    margin: 0 auto;
+    padding: 10px;
+    color: black;
+}
+
+.nav-link-workout:hover{
+    color: blue;
+}
+
+@media only screen and (max-width: 450px) {
+    #reps, #weight {
+        width: 85px
+    }
 }
