@@ -10,13 +10,17 @@ export default function DisplayWorkout({templates, addSet, handleSaveWorkout, ha
     const index = templates.findIndex(el => el.id === id)
 
   return (
-    <div>
+    <div className="display-workout">
         <h2>{templates[index].name}</h2>
         <ExerciseInputs template={templates[index]} index={index} addSet={addSet} handleEditSet={handleEditSet} handleDeleteSet={handleDeleteSet}/>
-        <button onClick={() => handleSaveWorkout(index)}>Save</button>
+        <div className="workout-button-container">
+          <button onClick={() => handleSaveWorkout(index)} id="save">Save</button>
+        </div>
         {templates[index].history.length > 0 && <DisplayHistory template={templates[index]}/>}
-        <Link to="/">Home</Link>
-        <Link to="/history">Dashboard</Link>
+        <div className="workout-footer">
+        <Link to="/" className="nav-link-workout">Home</Link>
+        <Link to="/history" className="nav-link-workout">Overview</Link>
+        </div>
     </div>
   )
 }

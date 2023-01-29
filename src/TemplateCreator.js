@@ -22,7 +22,7 @@ export default function TemplateCreator(props) {
       <div className="template-border">
         <div className="nav-header">
         <Link to="/">Home</Link>
-        <Link to="/history">Dashboard</Link>
+        <Link to="/history">Overview</Link>
         </div>
         <h1>Create a Workout</h1>
         <label htmlFor="wname">Workout Name: </label>
@@ -37,7 +37,7 @@ export default function TemplateCreator(props) {
       </div>
         {(templates !== undefined && templates.length > 0) && <TemplateLibrary templates={templates} handleDeleteTemplate={handleDeleteTemplate}/>}<br />
         <Link to="/" className="nav-link">Home</Link>
-        <Link to="/history" className="nav-link">Dashboard</Link>
+        <Link to="/history" className="nav-link">Overview</Link>
     </div>
   )
 }

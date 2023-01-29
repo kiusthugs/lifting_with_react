@@ -3,7 +3,7 @@ import React from 'react'
 export default function DisplayHistory({template}) {
     console.log(template)
   return (
-    <>
+    <div className="history">
     <h3>History</h3>
     {template.history.map((hist) => {
         return (<div key={hist.id}>
@@ -15,6 +15,6 @@ export default function DisplayHistory({template}) {
             </ol>
         </div>)
     })}
-    </>
+    </div>
   )
 }

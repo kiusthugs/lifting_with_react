@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
+import './styles/App.css';
 import TemplateCreator from './TemplateCreator';
 import DisplayWorkout from './DisplayWorkout';
 import DisplayMasterData from './DisplayMasterData';
@@ -94,6 +94,8 @@ function App() {
     console.log(foundWorkout)
 
     setTemplates(copyWorkout)
+    setTemplateExerciseInput("")
+    setTemplateNameInput("")
   }
 
   //Add exercise sets to workout

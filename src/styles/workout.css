@@ -1,0 +1,68 @@
+.exercise {
+    padding: 0 10px;
+}
+
+.display-workout h2 {
+    text-align: center;
+}
+
+.display-workout button {
+    background-color: #925cf4;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    color: white;
+}
+
+.display-workout button:hover {
+    cursor: pointer;
+}
+
+.delete-set:hover {
+    color: red;
+}
+
+
+#reps, #weight {
+    width: 100px;
+}
+
+.completed-lifts {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}
+
+.completed-lifts li {
+    margin: 5px 0;
+    list-style: none;
+}
+
+.history {
+    padding: 0 10px;
+}
+
+.history ol {
+    list-style: none;
+    counter-reset: list;
+}
+
+.history ol li {
+    margin: 10px 0;
+}
+
+.history ol > li:before {
+    content: counter(list) ") ";
+    counter-increment: list;
+  }
+
+.workout-button-container {
+    text-align: center;
+}
+
+#save {
+    width: 30%;
+    padding: 10px;
+    background-color: #fc8c63;
+    border: none;
+    font-size: 1.2em;
+}

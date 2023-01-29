@@ -115,18 +115,20 @@
     font-size: .9em;
 }
 
-.nav-link {
-    text-decoration: none;
-    margin: 0 20px;
-    padding: 10px;
-    color: black;
-    /* color: white;
-    background-color: lightgrey;
-    border-radius: 5px;
-    border: .5px solid black; */
+.workout-footer {
+    margin-top: 50px;
+    margin-bottom: 5px;
+    text-align: right;
 }
 
-.nav-link:hover{
+.nav-link-workout {
+    text-decoration: none;
+    margin: 0 auto;
+    padding: 10px;
+    color: black;
+}
+
+.nav-link-workout:hover{
     color: blue;
 }
 
