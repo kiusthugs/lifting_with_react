@@ -1,0 +1,132 @@
+.template-creator {
+    text-align: center;
+}
+
+.template-creator ol {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    counter-reset: list;
+}
+
+.template-creator li {
+    text-align: left;
+    margin: 0 10px;
+}
+
+.template-creator ol > li:before {
+  content: counter(list) ") ";
+  counter-increment: list;
+}
+
+.template-creator button{
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+
+.nav-header {
+    text-align: right;
+}
+
+.nav-header a{
+    color: black;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.nav-header a:hover{
+    color: blue;
+}
+
+.template-border {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.template-delete {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    font-size: 1.1em;
+}
+
+.template-delete:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.template-add {
+    margin: 10px;
+    width: 150px;
+    height: 25px;
+    background-color: #925cf4;
+}
+
+.template-save {
+    width: 200px;
+    height: 35px;
+    background-color: #fc8c63;
+}
+
+.template-library {
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.template {
+    min-width: 170px;
+    max-width: 190px;
+    margin: 10px auto;
+    padding: 25px;
+    position: relative;
+    background-color: #fc8c63;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+    transition: all .2s ease-in-out;
+}
+
+.template:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.template ul {
+    padding: 0;
+}
+
+.template-library > .template:nth-of-type(odd) {
+    background-color: #925cf4;
+}
+
+.template button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.template a {
+    text-decoration: none;
+    color: white;
+}
+
+.template a ul {
+    font-size: .9em;
+}
+
+.nav-link {
+    text-decoration: none;
+    margin: 0 20px;
+    padding: 10px;
+    color: black;
+    /* color: white;
+    background-color: lightgrey;
+    border-radius: 5px;
+    border: .5px solid black; */
+}
+
+.nav-link:hover{
+    color: blue;
+}
+

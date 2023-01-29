@@ -18,20 +18,26 @@ export default function TemplateCreator(props) {
 
 
   return (
-    <div>
+    <div className="template-creator">
+      <div className="template-border">
+        <div className="nav-header">
+        <Link to="/">Home</Link>
+        <Link to="/history">Dashboard</Link>
+        </div>
         <h1>Create a Workout</h1>
         <label htmlFor="wname">Workout Name: </label>
         <input type="text" id="wname" name="wname" onChange={(e) => handleTemplateNameInput(e)} value={templateNameInput}></input><br /><br />
         <label htmlFor="addExercises">Add Exercises: </label>
         <input type="text" id="addExercises" name="addExercises" onChange={(e) => handleExerciseInput(e)} value={templateExerciseInput}></input>
-        <button onClick={handleAddExercise}>Add Exercise</button>
-        <ul>
+        <button onClick={handleAddExercise} className="template-add">Add Exercise</button>
+        <ol>
         {templateExercises && templateExercises.map((exercise) => <li key={exercise.id}>{exercise.name}</li>)}
-        </ul>
-        <button onClick={handleSave}>Save Workout</button>
+        </ol>
+        <button onClick={handleSave} className="template-save">Save Workout</button>
+      </div>
         {(templates !== undefined && templates.length > 0) && <TemplateLibrary templates={templates} handleDeleteTemplate={handleDeleteTemplate}/>}<br />
-        <Link to="/">Home</Link>
-        <Link to="/history">Dashboard</Link>
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/history" className="nav-link">Dashboard</Link>
     </div>
   )
 }
